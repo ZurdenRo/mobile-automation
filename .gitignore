@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Apps móviles (binarios pesados)
+apps/*.apk
+apps/*.ipa
+apps/*.app
+
+# Artefactos de tests
+screenshots/
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
