@@ -61,6 +61,28 @@ class BasePage:
             logger.debug(f"Element is NOT visible: {locator}")
             return False
 
+    def is_list_element_visible(self, elements, position, timeout=None):
+        wait_timeout = timeout or EXPLICIT_TIMEOUT
+        logger.debug(
+            f"Checking visibility of element at position {position} "
+            f"in list of {len(elements)} (timeout={wait_timeout}s)"
+        )
+        try:
+            element = elements[position]
+        except IndexError:
+            logger.error(
+                f"Position {position} out of range for list of {len(elements)} element(s)"
+            )
+            return False
+        try:
+            wait = WebDriverWait(self.driver, timeout) if timeout else self.wait
+            wait.until(EC.visibility_of(element))
+            logger.debug(f"Element at position {position} is visible")
+            return True
+        except TimeoutException:
+            logger.debug(f"Element at position {position} is NOT visible")
+            return False
+
     def wait_until_visible(self, locator, timeout=None):
         wait_timeout = timeout or EXPLICIT_TIMEOUT
         logger.info(f"Waiting for element to be visible: {locator} (timeout={wait_timeout}s)")
